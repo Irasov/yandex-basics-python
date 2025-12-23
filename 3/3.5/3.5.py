@@ -118,7 +118,6 @@ res = setFist ^ setSecond
 with open(answer, "w", encoding="UTF-8") as file_out:
     print('\n'.join(sorted(res)), file=file_out)
 
-'''
 #Файловая чистка
 first = input()
 second = input()
@@ -133,3 +132,26 @@ for i in data:
 with open(second, "w", encoding="UTF-8") as file:
     for str in res:
         print(" ".join(str), file=file)
+
+
+'''
+#Хвост
+filename = input()
+n = int(input())
+with open(filename, 'rb') as f:
+    f.seek(0, 2)
+    pos = f.tell() - 1
+    lines = 0
+    f.seek(pos)
+    if f.read(1) == b'\n':
+        pos -= 1
+    while pos >= 0 and lines < n:
+        f.seek(pos)
+        if f.read(1) == b'\n':
+            lines += 1
+        pos -= 1
+    if pos < 0:
+        f.seek(0)
+    else:
+        f.seek(pos + 2)
+    print(f.read().decode())
