@@ -134,7 +134,6 @@ with open(second, "w", encoding="UTF-8") as file:
         print(" ".join(str), file=file)
 
 
-'''
 #Хвост
 filename = input()
 n = int(input())
@@ -155,3 +154,27 @@ with open(filename, 'rb') as f:
     else:
         f.seek(pos + 2)
     print(f.read().decode())
+
+    
+'''
+#Файловая статистика 2.0
+import json
+fileName = input()
+resName = input()
+positive = 0
+with open(fileName) as file:
+    numbers = [int(x) for x in file.read().split()]
+for i in numbers:
+    if i > 0:
+        positive += 1 
+res = {
+    "count": len(numbers), 
+    "positive_count": positive, 
+    "min": min(numbers),
+    "max": max(numbers), 
+    "sum": sum(numbers), 
+    "average": round(sum(numbers) / len(numbers), 2)
+}
+with open(resName, "w", encoding="UTF-8") as file_out:
+    json.dump(res, file_out, ensure_ascii=False, indent=2)
+print(res)
