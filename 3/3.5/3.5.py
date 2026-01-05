@@ -156,7 +156,7 @@ with open(filename, 'rb') as f:
     print(f.read().decode())
 
     
-'''
+
 #Файловая статистика 2.0
 import json
 fileName = input()
@@ -177,4 +177,43 @@ res = {
 }
 with open(resName, "w", encoding="UTF-8") as file_out:
     json.dump(res, file_out, ensure_ascii=False, indent=2)
+
 print(res)
+
+'''
+#Разделяй и властвуй
+fileNumbers = input()
+fileEven = input()
+fileOdd = input()
+fileEq = input()
+
+even_digits = "02468"
+odd_digits = "13579"
+
+with open(fileNumbers, encoding="UTF-8") as file:
+    numbers = [x for x in file.read().split("\n") if x]
+for string in numbers:
+    evens = []
+    odds = []
+    equals = []
+    for num in string.split():
+        ev = 0
+        od = 0
+        for ch in num:
+            if ch in even_digits:
+                ev += 1
+            elif ch in odd_digits:
+                od += 1
+        if ev > od:
+            evens.append(num)
+        elif od > ev:
+            odds.append(num)
+        else:
+            equals.append(num)    
+
+    with open(fileEven, "a", encoding="UTF-8") as file:
+        file.write(" ".join(evens) + "\n")
+    with open(fileOdd, "a", encoding="UTF-8") as file:
+        file.write(" ".join(odds) + "\n")
+    with open(fileEq, "a", encoding="UTF-8") as file:
+        file.write(" ".join(equals) + "\n")
