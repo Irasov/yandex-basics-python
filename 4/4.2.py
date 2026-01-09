@@ -59,7 +59,45 @@ def month(number, language="ru"):
     return monts[language][number - 1]
 
 
-"""
 #Подготовка данных
 def to_string(*data, sep=" ", end="\n"):
     return sep.join(str(value) for value in data) + end
+
+
+
+#Арифметический помощник
+def get_operator(operator):
+    if operator == "+":
+        return lambda a, b: a + b 
+    elif operator == "-":
+        return lambda a, b: a - b
+    elif operator == "*":
+        return lambda a, b: a * b
+    elif operator == "/":
+        return lambda a, b: a / b
+    elif operator == "**":
+        return lambda a, b: a ** b
+    elif operator == "//":
+        return lambda a, b: a // b
+
+
+
+#Подготовитель данных
+def to_string(*data, sep=" ", end=""):
+    return sep.join(str(value) for value in data) + end
+
+
+def get_formatter(sep=" ", end=""):
+    return lambda *data: to_string(*data, sep=sep, end=end)
+
+    
+"""   
+#Странный рост
+def grow(*args, **kwargs):
+    result = list(args)
+    for name, value in kwargs.items():
+        length = len(name)
+        for pos in range(len(result)):
+            if args[pos] % length == 0:
+                result[pos] += value
+    return tuple(result)
