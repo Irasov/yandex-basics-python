@@ -91,7 +91,7 @@ def get_formatter(sep=" ", end=""):
     return lambda *data: to_string(*data, sep=sep, end=end)
 
     
-"""   
+   
 #Странный рост
 def grow(*args, **kwargs):
     result = list(args)
@@ -101,3 +101,36 @@ def grow(*args, **kwargs):
             if args[pos] % length == 0:
                 result[pos] += value
     return tuple(result)
+
+
+#Странное произведение
+def product(*args, **kwargs):
+    keys = list(kwargs.keys())
+    res = []
+    for arg in args:
+        list_values = []
+        for k in keys:
+            if k in arg:
+                list_values.append(kwargs[k])
+        if list_values:
+            value = 1
+            for v in list_values:
+                value *= v
+            res.append(value)
+    return tuple(res)
+
+
+"""
+#Наилучший выбор
+def choice(*args, **kwargs):
+    if "min" in kwargs:
+        func = kwargs["min"]
+        min_max = min
+    else:
+        func = kwargs["max"]
+        min_max = max
+    return min_max(map(func, args))
+
+result = choice(1, 2, 3, 4, 5, max=lambda x: 2 ** x)
+
+print(result)
