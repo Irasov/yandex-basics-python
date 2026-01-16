@@ -9,7 +9,7 @@ def recursive_sum(*args):
 result = recursive_sum(1, 2, 3)
 print(result)  # 6
 
-"""
+
 #Рекурсивный сумматор цифр
 def recursive_digit_sum(number):
     if not number:
@@ -18,3 +18,13 @@ def recursive_digit_sum(number):
 
 result = recursive_digit_sum(7321346)
 print(result)  # 26
+
+
+"""
+#Многочлен N-ой степени
+def make_equation(*args):
+    if len(args) == 1:
+        return args[0]
+    return "(" + str(make_equation(*args[:-1])) + ") * x + " + str(args[-1])
+result = make_equation(3, 1, 5, 3)
+print(result)  # "(((3)*x + 1)*x + 5)*x + 3"
