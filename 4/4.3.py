@@ -70,7 +70,6 @@ print(get_letters('Декораторы это круто =)'))
 print(get_letters('Ехали медведи на велосипеде', method='drop'))
 
 
-"""
 #Сортировка слиянием
 def merge(left, right):
     result = []
@@ -96,3 +95,25 @@ def merge_sort(arr):
 
 result = merge_sort([3, 2, 1])
 print(result)  # [1, 2, 3]
+
+
+"""
+#Сортировка слиянием
+def same_type(func):
+    def new_func(*args):
+        first_type = type(args[0])
+        if all(type(el) == first_type for el in args):
+            return func(*args)
+        else:
+            print("Обнаружены различные типы данных")
+    return new_func
+
+
+@same_type
+def a_plus_b(a, b):
+    return a + b
+
+
+print(a_plus_b(3, 5.2) or 'Fail')
+print(a_plus_b(7, '9') or 'Fail')
+print(a_plus_b(-3, 5) or 'Fail')
