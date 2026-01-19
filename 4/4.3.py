@@ -97,7 +97,6 @@ result = merge_sort([3, 2, 1])
 print(result)  # [1, 2, 3]
 
 
-"""
 #Сортировка слиянием
 def same_type(func):
     def new_func(*args):
@@ -117,3 +116,14 @@ def a_plus_b(a, b):
 print(a_plus_b(3, 5.2) or 'Fail')
 print(a_plus_b(7, '9') or 'Fail')
 print(a_plus_b(-3, 5) or 'Fail')
+
+
+"""
+#Генератор Фибоначчи
+def fibonacci(n):
+    n_1, n_2 = 0, 1
+    for _ in range(n):
+        yield n_1
+        n_1, n_2 = n_2, n_1 + n_2
+
+print(*fibonacci(5))
