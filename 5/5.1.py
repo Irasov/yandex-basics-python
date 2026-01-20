@@ -95,14 +95,12 @@ programmer.work(250)
 print(programmer.info())
 
 
-"""
-#Работа не волк
+#Классный прямоугольник
 class Rectangle:
     def __init__(self, first, second):
         (x1, y1), (x2, y2) = first, second
         x1, x2 = sorted((x1, x2))
         y1, y2 = sorted((y1, y2))
-       # self.x, self.y = x1, y1
         self.width = x2 - x1
         self.height = y2 - y1
 
@@ -116,3 +114,50 @@ rect = Rectangle((3.2, -4.3), (7.52, 3.14))
 print(rect.perimeter())
 rect = Rectangle((7.52, -4.3), (3.2, 3.14))
 print(rect.area())
+
+
+"""
+#Классный прямоугольник 2.0
+class Rectangle:
+    def __init__(self, first, second):
+        (x1, y1), (x2, y2) = first, second
+        x1, x2 = sorted((x1, x2))
+        y1, y2 = sorted((y1, y2))
+        self.p1, self.p2 = [x1, y1], [x2, y2]
+        self.width = x2 - x1
+        self.height = y2 - y1
+
+    def area(self):
+        return round(self.width * self.height, 2)
+
+    def perimeter(self):
+        return round(2 * (self.width + self.height), 2)
+
+    def get_pos(self):
+        return (round(self.p1[0], 2), round(self.p2[1], 2))
+
+    def get_size(self):
+        return (round(self.width, 2), round(self.height, 2))
+
+    def move(self, dx, dy):
+        self.p1[0] += dx
+        self.p1[1] += dy
+        self.p2[0] += dx
+        self.p2[1] += dy
+
+    def resize(self, new_width, new_height):
+        self.width = new_width
+        self.height = new_height
+        self.p1[1] = self.p1[1] + new_width
+        self.p2[0] = self.p1[0] - new_height
+
+
+rect = Rectangle((3.2, -4.3), (7.52, 3.14))
+print(rect.get_pos(), rect.get_size())
+rect.move(1.32, -5)
+print(rect.get_pos(), rect.get_size())
+
+rect = Rectangle((7.52, -4.3), (3.2, 3.14))
+print(rect.get_pos(), rect.get_size())
+rect.resize(23.5, 11.3)
+print(rect.get_pos(), rect.get_size())
