@@ -122,7 +122,7 @@ first_point = second_point = PatchedPoint((2, -7))
 first_point += (7, 3)
 print(first_point, second_point, first_point is second_point)
 
-"""
+
 #Дроби v0.1
 class Fraction:
     def __init__(self, *args):
@@ -178,3 +178,75 @@ fraction.numerator(10)
 print(fraction.numerator(), fraction.denominator())
 fraction.denominator(2)
 print(fraction.numerator(), fraction.denominator())
+
+
+"""
+#Дроби v0.2
+
+class Fraction:
+    def __init__(self, *args):
+        if len(args) == 2:
+            self.num = args[0]
+            self.den = args[1]
+        else:
+            self.num = int(args[0][:args[0].find("/")])
+            self.den = int(args[0][args[0].find("/") + 1:])
+        nod = self.__nod(self.num, self.den)
+        self.__rdc(nod)
+
+    def __nod(self, a, b):
+        while b:
+            a, b = b, a % b
+        return a
+
+    def __rdc(self, nod):
+        self.den = self.den / nod
+        self.num = self.num / nod
+
+    def numerator(self, a=0):
+        if a == 0:
+            return int(abs(self.num))
+        else:
+            if self.num < 0:
+                self.num = -a
+            else:
+                self.num = a
+            nod = self.__nod(self.num, self.den)
+            self.__rdc(nod)
+
+    def denominator(self, a=0):
+        if a == 0:
+            return int(abs(self.den))
+        else:
+            if self.den < 0:
+                self.den = -a
+            else:
+                self.den = a
+            nod = self.__nod(self.num, self.den)
+            self.__rdc(nod)
+
+    def __str__(self):
+        return f"{int(self.num)}/{int(self.den)}"
+
+    def __repr__(self):
+        return f"Fraction('{int(self.num)}/{int(self.den)}')"
+    
+    def __neg__(self):  
+        return Fraction(-self.num, self.den)
+    
+ 
+a = Fraction(1, 3)
+b = Fraction(-2, -6)
+c = Fraction(-3, 9)
+d = Fraction(4, -12)
+print(a, b, c, d)
+print(*map(repr, (a, b, c, d)))
+
+a = Fraction('-1/2')
+b = -a
+print(a, b, a is b)
+b.numerator(-b.numerator())
+a.denominator(-3)
+print(a, b)
+print(a.numerator(), a.denominator())
+print(b.numerator(), b.denominator())
